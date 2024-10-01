@@ -450,6 +450,8 @@ def main():
             st.success(get_text("login_success"))
             st.experimental_rerun()
     else:
+        st.image("https://landen.imgix.net/7rk6p0gy8v4m/assets/m33hdvag.png?w=300", width=300)
+
         st.write(get_text("welcome").format(st.session_state['username']))
 
         with st.form("chatbot_form"):
