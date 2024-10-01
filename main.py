@@ -47,6 +47,34 @@ translations = {
         "sitemap_not_found": "Sitemap not found, starting crawl...",
         "crawling_website": "Crawling website for links...",
         "additional_links": "Additional Site Links",
+        "system_prompt_custom_structure": """WHO YOU ARE: [brief description]
+ROLE: [detailed role description]
+OBJECTIVE: [clear objective]
+TONE: [tone description]
+
+---
+
+Ensure that all parts are fully customized based on the provided information.
+Remember to write all in '{language}' language.""",
+        "system_prompt_standard_structure": """RULES: Rules for the chatbot interaction, including don't respond to sensitive topics, etc.
+IDENTIFICATION WITH THE COMPANY: Always refer to the company as 'we' or 'us', and to the user as 'you'.
+MESSAGE LENGTH: Keep messages concise and to the point, avoiding long paragraphs.
+CONSULTATION & LONG-TERM RELATIONSHIPS: Provide advice and build long-term relationships with users.
+---
+
+Ensure that all parts are customized based on the provided information while maintaining the core structure. Write as instructions.
+Remember to write all in '{language}' language.""",
+        "api_key_required": "Please enter your OpenAI API key.",
+        "placeholders": {
+            "username": "Enter your username",
+            "openai_key": "Enter your OpenAI API key",
+            "assistant_name": "e.g., Amelia",
+            "company_name": "e.g., Aminos",
+            "objective": "Describe the main goal of the assistant",
+            "main_url": "https://example.com",
+            "contact_url": "https://example.com/contact",
+            "other_urls": "https://example.com/page1\nhttps://example.com/page2"
+        }
     },
     "it": {
         "login_title": "Accesso",
@@ -82,19 +110,157 @@ translations = {
         "sitemap_not_found": "Sitemap non trovata, avvio del crawl...",
         "crawling_website": "Crawling del sito web in corso...",
         "additional_links": "Link aggiuntivi del sito",
+        "system_prompt_custom_structure": """CHI SEI: [breve descrizione]
+RUOLO: [descrizione dettagliata del ruolo]
+OBIETTIVO: [chiaro obiettivo]
+TONO: [descrizione del tono]
+
+---
+
+Assicurati che tutte le parti siano completamente personalizzate in base alle informazioni fornite.
+Ricorda di scrivere tutto in '{language}'.""",
+        "system_prompt_standard_structure": """REGOLE: Regole per l'interazione del chatbot, incluso non rispondere a argomenti sensibili, ecc.
+IMMEDESIMAZIONE E APPARTENENZA AZIENDA: Fai sempre riferimento all'azienda come 'noi' o 'ci', e all'utente come 'tu'.
+LUNGHEZZA MESSAGGI: Mantieni i messaggi concisi e diretti, evitando lunghi paragrafi.
+CONSULENZA & RAPPORTI DI LUNGO PERIODO: Fornisci consigli e costruisci rapporti a lungo termine con gli utenti.
+---
+
+Assicurati che tutte le parti siano personalizzate in base alle informazioni fornite mantenendo la struttura di base. Scrivi come degli ordini.
+Ricorda di scrivere tutto in '{language}'.""",
+        "api_key_required": "Per favore, inserisci la tua chiave API OpenAI.",
+        "placeholders": {
+            "username": "Inserisci il tuo nome utente",
+            "openai_key": "Inserisci la tua chiave API OpenAI",
+            "assistant_name": "es. Amelia",
+            "company_name": "es. Aminos",
+            "objective": "Descrivi l'obiettivo principale dell'assistente",
+            "main_url": "https://esempio.com",
+            "contact_url": "https://esempio.com/contatti",
+            "other_urls": "https://esempio.com/pagina1\nhttps://esempio.com/pagina2"
+        }
     }
 }
 
 def get_text(key):
     return translations[st.session_state.get('language', 'en')][key]
 
+def get_placeholder(key):
+    return translations[st.session_state.get('language', 'en')]['placeholders'][key]
+
 def login():
     language = st.selectbox("Language / Lingua", ["en", "it"])
     st.session_state['language'] = language
     st.title(get_text("login_title"))
+
+    # Add the logo
+    st.image("https://landen.imgix.net/7rk6p0gy8v4m/assets/m33hdvag.png?w=300", width=300)
+
+    # Add expanders with information about Aminos
+    with st.expander("What is Aminos?" if language == 'en' else "Cos'è Aminos?"):
+        st.markdown("""
+        # Chatbots Made Easy 💪
+
+        Collect more leads. Increase your conversions.
+
+        The future is conversational.
+
+        **START NOW**
+
+        **REQUEST A DEMO**
+
+        *We're in beta: invitation required, or request a demo.*
+        """ if language == 'en' else """
+        # Chatbot Facili da Creare 💪
+
+        Raccogli più contatti. Aumenta le tue conversioni.
+
+        Il futuro è conversazionale.
+
+        **INIZIA ORA**
+
+        **RICHIEDI UNA DEMO**
+
+        *Siamo in beta: richiesta di invito necessaria, o richiedi una demo.*
+        """)
+
+    with st.expander("Why Choose Aminos?" if language == 'en' else "Perché scegliere Aminos?"):
+        st.markdown("""
+        ## Works Everywhere 👌
+
+        Anywhere you can insert a code snippet, we're there... including some of our favourites.
+
+        💬 **Conversational Marketing**
+
+        The web is turning conversational. Build and deploy simple automated chatbots that engage & delight your prospects, customers & users with a variety of exciting use cases.
+
+        - Surveys
+        - Lead Generation
+        - Nurturing
+        - Conversion
+
+        **Drag & Drop Simple 💆‍♂️**
+
+        No coding, no headaches. Just drag and drop conversational elements and unleash your creativity... The possibilities are endless.
+
+        - Drag & Drop
+        - No Coding
+        - Easy Integration
+
+        **Lead Gen, Reinvented 🤖**
+
+        Forget static forms or boring surveys. Our automated chatbots are a new, engaging way to generate leads or survey your prospects.
+
+        **Leads, Surveys & More**
+
+        Collect emails? Run a survey? Generate bookings? Your only limitation is your creativity. Export leads from any of your bots to a CSV, or simply view them online.
+
+        **Integrate Anywhere with Zapier**
+
+        We integrate with Zapier so you can seamlessly pass leads anywhere (to a Google Sheet, for example) or create advanced automations with thousands of apps.
+        """ if language == 'en' else """
+        ## Funziona Ovunque 👌
+
+        Ovunque tu possa inserire un frammento di codice, noi ci siamo... inclusi alcuni dei nostri preferiti.
+
+        💬 **Marketing Conversazionale**
+
+        Il web sta diventando conversazionale. Costruisci e distribuisci chatbot automatici semplici che coinvolgono e deliziano i tuoi potenziali clienti, clienti e utenti con una varietà di casi d'uso entusiasmanti.
+
+        - Sondaggi
+        - Generazione di contatti
+        - Nurturing
+        - Conversione
+
+        **Semplice Drag & Drop 💆‍♂️**
+
+        Nessuna codifica, nessun mal di testa. Basta trascinare e rilasciare elementi conversazionali e liberare la tua creatività... Le possibilità sono infinite.
+
+        - Drag & Drop
+        - Nessuna Codifica
+        - Integrazione Facile
+
+        **Lead Gen, Reinventato 🤖**
+
+        Dimentica moduli statici o sondaggi noiosi. I nostri chatbot automatici sono un nuovo modo coinvolgente per generare contatti o sondare i tuoi potenziali clienti.
+
+        **Contatti, Sondaggi e Altro**
+
+        Raccogli email? Esegui un sondaggio? Genera prenotazioni? Il tuo unico limite è la tua creatività. Esporta i contatti da qualsiasi dei tuoi bot in un CSV, o semplicemente visualizzali online.
+
+        **Integra Ovunque con Zapier**
+
+        Ci integriamo con Zapier così puoi passare i contatti ovunque (ad esempio a un Foglio Google) o creare automazioni avanzate con migliaia di app.
+        """)
+
+    st.markdown("""
+    This web app allows you to create chatbots in 90 seconds, and was developed exclusively for the Aminos community.
+    """ if language == 'en' else """
+    Questa web app ti permette di creare chatbot in 90 secondi, ed è stata sviluppata esclusivamente per la comunità Aminos.
+    """)
+
     with st.form("login_form"):
-        username = st.text_input(get_text("username"))
-        openai_key = st.text_input(get_text("openai_key"), type="password")
+        username = st.text_input(get_text("username"), placeholder=get_placeholder("username"))
+        openai_key = st.text_input(get_text("openai_key"), type="password", placeholder=get_placeholder("openai_key"))
         st.markdown(get_text("openai_key_info"))
         submitted = st.form_submit_button(get_text("login_button"))
         if submitted:
@@ -103,11 +269,15 @@ def login():
                 st.session_state['username'] = username
                 st.session_state['openai_key'] = openai_key
                 return True
+            else:
+                st.error(get_text("api_key_required"))
     return False
 
 def scrape_urls(urls, status):
     content_dict = {}
     for url in urls:
+        if not url.strip():
+            continue
         try:
             status.write(f"{get_text('step_scraping')} {url}")
             response = requests.get(url)
@@ -120,33 +290,64 @@ def scrape_urls(urls, status):
             st.error(get_text("scraping_error").format(url, str(e)))
     return content_dict
 
+def parse_sitemap(sitemap_url):
+    links = set()
+    try:
+        response = requests.get(sitemap_url)
+        if response.status_code == 200:
+            sitemap_content = response.content
+            root = ET.fromstring(sitemap_content)
+            namespace = {'ns': 'http://www.sitemaps.org/schemas/sitemap/0.9'}
+            if root.tag.endswith('sitemapindex'):
+                # Recursively parse nested sitemaps
+                sitemaps = root.findall('ns:sitemap', namespaces=namespace)
+                for sitemap in sitemaps:
+                    loc = sitemap.find('ns:loc', namespaces=namespace)
+                    if loc is not None:
+                        sitemap_loc = loc.text
+                        links.update(parse_sitemap(sitemap_loc))
+            elif root.tag.endswith('urlset'):
+                # It's a regular sitemap
+                urls = root.findall('.//ns:loc', namespaces=namespace)
+                for url_elem in urls:
+                    links.add(url_elem.text)
+        return links
+    except Exception as e:
+        return links
+
 def get_site_links(url, status):
     site_links = set()
     parsed_url = urlparse(url)
     base_url = f"{parsed_url.scheme}://{parsed_url.netloc}"
 
     # First, try to find the sitemap
-    sitemap_url = urljoin(base_url, 'sitemap.xml')
-    try:
-        status.write(get_text("attempting_sitemap").format(sitemap_url))
-        response = requests.get(sitemap_url)
-        if response.status_code == 200:
-            # Parse the sitemap
-            sitemap_xml = response.content
-            root = ET.fromstring(sitemap_xml)
-            namespace = {'ns': 'http://www.sitemaps.org/schemas/sitemap/0.9'}
-            urls = root.findall('.//ns:loc', namespaces=namespace)
-            for url_elem in urls:
-                site_links.add(url_elem.text)
+    sitemap_urls = [
+        urljoin(base_url, 'sitemap.xml'),
+        urljoin(base_url, 'sitemap_index.xml'),
+        urljoin(base_url, 'sitemap-index.xml'),
+    ]
+    found_sitemap = False
+    for sitemap_url in sitemap_urls:
+        try:
+            status.write(get_text("attempting_sitemap").format(sitemap_url))
+            response = requests.get(sitemap_url)
+            if response.status_code == 200:
+                site_links.update(parse_sitemap(sitemap_url))
+                found_sitemap = True
                 if len(site_links) >= 500:
                     break
-            return list(site_links)
-        else:
-            status.write(get_text("sitemap_not_found"))
-    except Exception as e:
-        status.write(get_text("sitemap_not_found"))
+                else:
+                    continue
+            else:
+                continue
+        except Exception as e:
+            continue
+
+    if found_sitemap:
+        return list(site_links)[:500]
 
     # If sitemap not found, perform a crawl up to 100 links
+    status.write(get_text("sitemap_not_found"))
     status.write(get_text("crawling_website"))
     visited = set()
     queue = deque()
@@ -171,27 +372,15 @@ def get_site_links(url, status):
 
 def generate_custom_prompt(info):
     openai.api_key = st.session_state['openai_key']
-    system_prompt = f"""You are an expert in creating custom prompts for chatbots. 
-Your task is to create a highly personalized prompt based on the given information.
-The output should strictly follow this structure:
-
-CHI SEI: [brief description]
-RUOLO: [detailed role description]
-OBIETTIVO: [clear objective]
-TONO: [tone description]
-
----
-
-Ensure that all parts are fully customized based on the provided information.
-Remember to write all in '{st.session_state['language']}' language."""
+    system_prompt = get_text('system_prompt_custom_structure').format(language=st.session_state['language'])
 
     user_prompt = f"""
-Create a custom prompt for a chatbot with the following information:
-Assistant Name: {info['nome_assistente']}
-Company Name: {info['nome_azienda']}
-Purpose: {info['scopo']}
-Objective: {info['obiettivo']}
-Personality: {info['personalita']}
+Crea un prompt personalizzato per un chatbot con le seguenti informazioni:
+Nome Assistente: {info['nome_assistente']}
+Nome Azienda: {info['nome_azienda']}
+Scopo: {info['scopo']}
+Obiettivo: {info['obiettivo']}
+Personalità: {info['personalita']}
 """
     response = openai.ChatCompletion.create(
         model="gpt-3.5-turbo",
@@ -205,25 +394,14 @@ Personality: {info['personalita']}
 
 def generate_standard_prompt(info):
     openai.api_key = st.session_state['openai_key']
-    system_prompt = f"""You are an expert in creating standard prompts for chatbots. 
-Your task is to customize a standard prompt template based on the given information.
-The output should strictly follow this structure:
-
-REGOLE: Rules for the chatbot interaction, including don't respond to sensitive topics, etc.
-IMMEDESIMAZIONE E APPARTENENZA AZIENDA: Always refer to the company as 'we' or 'us', and the user as 'you'.
-LUNGHEZZA MESSAGGI: Keep messages concise and to the point, avoiding long paragraphs.
-CONSULENZA & RAPPORTI DI LUNGO PERIODO: Provide advice and build long-term relationships with users.
----
-
-Ensure that all parts are customized based on the provided information while maintaining the core structure. Scrivi come degli ordini.
-Remember to write all in '{st.session_state['language']}' language."""
+    system_prompt = get_text('system_prompt_standard_structure').format(language=st.session_state['language'])
 
     user_prompt = f"""
-Customize this standard prompt for a chatbot based on the following information:
-Company Name: {info['nome_azienda']}
-Personality: {info['personalita']}
-Purpose: {info['scopo']}
-Objective: {info['obiettivo']}
+Personalizza questo prompt standard per un chatbot basato sulle seguenti informazioni:
+Nome Azienda: {info['nome_azienda']}
+Personalità: {info['personalita']}
+Scopo: {info['scopo']}
+Obiettivo: {info['obiettivo']}
 """
     response = openai.ChatCompletion.create(
         model="gpt-3.5-turbo",
@@ -274,88 +452,30 @@ def main():
     else:
         st.write(get_text("welcome").format(st.session_state['username']))
 
-        # Add the logo
-        st.image("https://landen.imgix.net/7rk6p0gy8v4m/assets/m33hdvag.png?w=300", width=300)
-
-        # Add expanders with information about Aminos
-        with st.expander("What is Aminos?"):
-            st.markdown("""
-            # Chatbots Made Easy 💪
-
-            Collect more leads. Increase your conversions.
-
-            The future is conversational.
-
-            **START NOW**
-
-            **REQUEST A DEMO**
-
-            *We're in beta: invitation required, or request a demo.*
-            """)
-
-        with st.expander("Why Choose Aminos?"):
-            st.markdown("""
-            ## Works Everywhere 👌
-
-            Anywhere you can insert a code snippet, we're there... including some of our favourites.
-
-            💬 **Conversational Marketing**
-
-            The web is turning conversational. Build and deploy simple automated chatbots that engage & delight your prospects, customers & users with a variety of exciting use cases.
-
-            - Surveys
-            - Lead Generation
-            - Nurturing
-            - Conversion
-
-            **Drag & Drop Simple 💆‍♂️**
-
-            No coding, no headaches. Just drag and drop conversational elements and unleash your creativity... The possibilities are endless.
-
-            - Drag & Drop
-            - No Coding
-            - Easy Integration
-
-            **Lead Gen, Reinvented 🤖**
-
-            Forget static forms or boring surveys. Our automated chatbots are a new, engaging way to generate leads or survey your prospects.
-
-            **Leads, Surveys & More**
-
-            Collect emails? Run a survey? Generate bookings? Your only limitation is your creativity. Export leads from any of your bots to a CSV, or simply view them online.
-
-            **Integrate Anywhere with Zapier**
-
-            We integrate with Zapier so you can seamlessly pass leads anywhere (to a Google Sheet, for example) or create advanced automations with thousands of apps.
-            """)
-
-        st.markdown("""
-        This web app allows you to create chatbots in 90 seconds, and was developed exclusively for the Aminos community.
-        """)
-
         with st.form("chatbot_form"):
             col1, col2 = st.columns(2)
 
             with col1:
-                nome_assistente = st.text_input(get_text("assistant_name"))
-                nome_azienda = st.text_input(get_text("company_name"))
+                nome_assistente = st.text_input(get_text("assistant_name"), placeholder=get_placeholder("assistant_name"))
+                nome_azienda = st.text_input(get_text("company_name"), placeholder=get_placeholder("company_name"))
                 scopo = st.selectbox(get_text("assistant_purpose"), get_text("purposes"))
 
                 if scopo in ["Appointment Booking", "Prenotazione appuntamenti"]:
                     booking_url = st.text_input(get_text("booking_url"))
 
-                obiettivo = st.text_area(get_text("objective"))
+                obiettivo = st.text_area(get_text("objective"), placeholder=get_placeholder("objective"))
 
             with col2:
                 personalita = st.selectbox(get_text("personality"), get_text("personalities"))
-                url_principale = st.text_input(get_text("main_url"))
-                url_contatti = st.text_input(get_text("contact_url"))
-                altri_url = st.text_area(get_text("other_urls"))
+                url_principale = st.text_input(get_text("main_url"), placeholder=get_placeholder("main_url"))
+                url_contatti = st.text_input(get_text("contact_url"), placeholder=get_placeholder("contact_url"))
+                altri_url = st.text_area(get_text("other_urls"), placeholder=get_placeholder("other_urls"))
 
             submitted = st.form_submit_button(get_text("generate_button"))
 
             if submitted:
-                with st.status(get_text("processing"), expanded=True) as status:
+                with st.spinner(get_text("processing")):
+                    status = st.empty()
                     # Generate list of URLs to scrape for FAQs
                     faq_urls = [url_principale, url_contatti] + altri_url.split('\n')
 
@@ -374,7 +494,7 @@ def main():
                     }
 
                     if scopo in ["Appointment Booking", "Prenotazione appuntamenti"]:
-                        info['obiettivo'] += f" The main goal is to get users to book appointments using this link: {booking_url}"
+                        info['obiettivo'] += f" Lo scopo principale è far prenotare gli utenti utilizzando questo link: {booking_url}"
 
                     status.write(get_text("step_custom_prompt"))
                     custom_prompt = generate_custom_prompt(info)
@@ -388,7 +508,7 @@ def main():
                     faqs = generate_faqs(content)
                     time.sleep(1)
 
-                    status.update(label=get_text("process_complete"), state="complete", expanded=False)
+                    status.write(get_text("process_complete"))
 
                 # Visualizzazione dei risultati in expander e text area
                 with st.expander(get_text("custom_prompt"), expanded=True):
