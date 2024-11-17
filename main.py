@@ -69,7 +69,7 @@ Remember to write all in '{language}' language.""",
             "username": "Enter your username",
             "openai_key": "Enter your OpenAI API key",
             "assistant_name": "e.g., Amelia",
-            "company_name": "e.g., Aminos",
+            "company_name": "e.g., Cloudelo",
             "objective": "Describe the main goal of the assistant",
             "main_url": "https://example.com",
             "contact_url": "https://example.com/contact",
@@ -132,7 +132,7 @@ Ricorda di scrivere tutto in '{language}'.""",
             "username": "Inserisci il tuo nome utente",
             "openai_key": "Inserisci la tua chiave API OpenAI",
             "assistant_name": "es. Amelia",
-            "company_name": "es. Aminos",
+            "company_name": "es. Cloudelo",
             "objective": "Descrivi l'obiettivo principale dell'assistente",
             "main_url": "https://esempio.com",
             "contact_url": "https://esempio.com/contatti",
@@ -153,10 +153,10 @@ def login():
     st.title(get_text("login_title"))
 
     # Add the logo
-    st.image("https://landen.imgix.net/7rk6p0gy8v4m/assets/m33hdvag.png?w=300", width=300)
+    st.image("https://cloudelo.eu/wp-content/uploads/2024/08/cropped-cloudelo-1-128x92.png", width=300)
 
-    # Add expanders with information about Aminos
-    with st.expander("What is Aminos?" if language == 'en' else "Cos'è Aminos?"):
+    # Add expanders with information about Cloudelo
+    with st.expander("What is Cloudelo?" if language == 'en' else "Cos'è Cloudelo?"):
         st.markdown("""
         # Chatbots Made Easy 💪
 
@@ -183,7 +183,7 @@ def login():
         *Siamo in beta: richiesta di invito necessaria, o richiedi una demo.*
         """)
 
-    with st.expander("Why Choose Aminos?" if language == 'en' else "Perché scegliere Aminos?"):
+    with st.expander("Why Choose Cloudelo?" if language == 'en' else "Perché scegliere Cloudelo?"):
         st.markdown("""
         ## Works Everywhere 👌
 
@@ -253,9 +253,9 @@ def login():
         """)
 
     st.markdown("""
-    This web app allows you to create chatbots in 90 seconds, and was developed exclusively for the Aminos community.
+    This web app allows you to create chatbots in 90 seconds, and was developed exclusively for the Cloudelo community.
     """ if language == 'en' else """
-    Questa web app ti permette di creare chatbot in 90 secondi, ed è stata sviluppata esclusivamente per la comunità Aminos.
+    Questa web app ti permette di creare chatbot in 90 secondi, ed è stata sviluppata esclusivamente per la comunità Cloudelo.
     """)
 
     with st.form("login_form"):
